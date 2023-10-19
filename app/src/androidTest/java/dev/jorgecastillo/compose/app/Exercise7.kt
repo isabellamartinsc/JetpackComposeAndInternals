@@ -168,7 +168,22 @@ private fun AdaptativeScreen() {
     val speaker = speakers.first()
     val friends = speakers.drop(1)
 
-    // Add your code here
+    BoxWithConstraints(Modifier.fillMaxSize()) {
+        val isTablet = maxWidth >= 600.dp
+        if (isTablet) {
+            Row {
+                ProfileScreen(
+                    speaker,
+                    Modifier
+                        .width(320.dp)
+                        .fillMaxHeight()
+                )
+                FriendsScreen(friends, Modifier.weight(1f))
+            }
+        } else {
+            ProfileScreen(speaker, Modifier.fillMaxSize())
+        }
+    }
 }
 
 @Composable
